@@ -1,0 +1,88 @@
+@font-face {
+    font-family: sora-var;
+    src: url("assets/fonts/Sora/Sora-VariableFont_wght.ttf");
+}
+
+/* === Design Tokens === */
+:root {
+    /* == Colors == */
+    --neutral-900: hsl(0 0 7);
+    --neutral-800: hsl(0 0 15);
+    --neutral-500: hsl(240 3 46);
+    --neutral-400: hsl(240 1 59);
+    --neutral-0: hsl(0 0 100);
+
+    --blue-600: hsl(214 100 55);
+    --blue-400: hsl(210 100 65);
+
+    --red-500: hsl(354 63 57);
+
+    --green-500: hsl(140 63 57);
+
+    --yellow-400: hsl(49 85 70);
+
+    /* == Typography == */
+    --text-2xs: 1.2rem;
+    --text-xs: 1.6rem;
+    --text-sm: 1.8rem;
+    --text-md: 2rem;
+    --text-lg: 2.4rem;
+    --text-xl: 3.2rem;
+    --text-2xl: 4rem;
+
+    /* "Leading" (line-height) --- a typography term from physical typesetting — back when type was set with metal blocks, printers would insert strips of **lead** (the metal) between lines of text to control the spacing */
+    --leading-tight: 1;
+    --leading-snug: 1.2;
+    --leading-normal: 1.36;
+
+    /* "Tracking" (letter-spacing)--- referred to the uniform spacing adjustment across a whole block of text (as opposed to **kerning**, which is the spacing between two *specific* characters). */
+    --tracking-tighter: -0.6px;
+    --tracking-tight: -0.48px;
+    --tracking-snug: -0.3px;
+    --tracking-normal: 0px;
+    --tracking-wide: 0.32px;
+    --tracking-wider: 0.4px;
+
+    /* == Spacing == */
+    --space-0: 0rem;
+    --space-0_5: 0.2rem;
+    --space-1: 0.4rem;
+    --space-1_5: 0.6rem;
+    --space-2: 0.8rem;
+    --space-2_5: 1rem;
+    --space-3: 1.2rem;
+    --space-4: 1.6rem;
+    --space-5: 2rem;
+    --space-6: 2.4rem;
+    --space-8: 3.2rem;
+    --space-10: 4rem;
+    --space-12: 4.8rem;
+    --space-16: 6.4rem;
+    --space-20: 8rem;
+    --space-24: 9.6rem;
+    --space-28: 11.2rem;
+    --space-32: 12.8rem;
+    --space-36: 14.4rem;
+
+    --rounded-0: 0rem;
+    --rounded-2xs: 0.4rem;
+    --rounded-xs: 0.6rem;
+    --rounded-sm: 0.8rem;
+    --rounded-md: 1rem;
+    --rounded-lg: 1.2rem;
+    --rounded-xl: 1.6rem;
+    --rounded-2xl: 2rem;
+    --rounded-3xl: 2.4rem;
+    --rounded-full: 9999rem;
+}
+
+html {
+    /* Align 1rem to 10px for easier rem calculations */
+    font-size: 62.5%;
+}
+
+/* === Typography === */
+body {
+    font-family: sora-var;
+    font-size: var(--text-md);
+}
