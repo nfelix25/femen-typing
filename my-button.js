@@ -1,7 +1,10 @@
 class MyButton extends HTMLElement {
     connectedCallback() {
         const label = this.getAttribute("label");
-        this.innerHTML = `<button class="text-preset-3 semi-bold">${label}</button>`;
+        const cls = this.getAttribute("class") ?? "primary";
+        const icon = this.getAttribute("icon");
+
+        this.innerHTML = `<button class="text-preset-3 semi-bold ${cls}">${label}${icon ? `<img src="${icon}" />` : ""}</button>`;
 
         this.querySelector("button").addEventListener("click", () => {
             this.handleClick();
