@@ -15,35 +15,37 @@
         <link rel="stylesheet" href="style.css" />
 
         <script src="my-button.js" defer></script>
+        <script src="my-text.js" defer></script>
 
         <title>Frontend Mentor | Typing Speed Test</title>
     </head>
     <body>
-        Personal best:
-        <!-- PB -->
-        WPM WPM:
-        <!-- WPM -->
-        Accuracy:
-        <!-- Accuracy -->
-        Time:
-        <!-- Time -->
-
-        Difficulty: Easy Medium Hard Mode: Timed (60s) Passage
-
-        <!-- Passage -->
-
-        Start Typing Test Or click the text and start typing
-
-        <!-- Test Complete Start -->
-
-        Test Complete! Solid run. Keep pushing to beat your high score. WPM:
-        <!-- WPM -->
-        Accuracy:
-        <!-- Accuracy -->
-        Characters:
-        <!-- Correct/Incorrect -->
-
-        Go Again
+        <header>
+            <img src="assets/images/logo-large.svg" />
+            <span
+                ><img src="assets/images/icon-personal-best.svg" /><my-text
+                    preset="4"
+                    variant="dark"
+                    >Personal Best: </my-text
+                ><my-text preset="4">--WPM</my-text></span
+            >
+        </header>
+        <main>
+            <header>
+                <span id="stats"
+                    ><span
+                        ><my-text preset="3" variant="dark">WPM:</my-text
+                        ><my-text preset="2" semi-bold>--</my-text></span
+                    ><span
+                        ><my-text preset="3" variant="dark">Accuracy:</my-text
+                        ><my-text preset="2" semi-bold>100%</my-text></span
+                    ><span
+                        ><my-text preset="3" variant="dark">Time:</my-text
+                        ><my-text preset="2" semi-bold>456</my-text></span
+                    ></span
+                ><span id="settings">SETTINGS</span>
+            </header>
+        </main>
 
         <my-button label="Primary Button"></my-button>
         <my-button
