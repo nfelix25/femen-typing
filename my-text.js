@@ -126,6 +126,10 @@ class MyTimer extends MyTextTwoSemiBold {
         cancelAnimationFrame(this.#_frameId);
     }
 
+    reset() {
+        this.time = 0.0;
+    }
+
     get time() {
         return this.#_curr_time;
     }

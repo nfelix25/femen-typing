@@ -181,12 +181,24 @@ body {
 
         padding-inline: var(--space-5);
 
-        img {
-            fill: var(--neutral-900);
-        }
-
         &:hover {
             background-color: var(--neutral-100);
+        }
+
+        &:disabled {
+            background-color: var(--neutral-100);
+            color: var(--neutral-400);
+            cursor: not-allowed;
+        }
+    }
+
+    &.toggle {
+        &.off {
+            background-color: limegreen;
+        }
+
+        &.on {
+            background-color: red;
         }
     }
 }

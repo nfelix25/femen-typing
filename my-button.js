@@ -6,6 +6,10 @@ class MyButton extends HTMLElement {
 
         this.innerHTML = `<button class="text-preset-3 semi-bold ${cls}">${label}${icon ? `<img src="${icon}" />` : ""}</button>`;
     }
+
+    get button() {
+        return this.querySelector("button");
+    }
 }
 
 class MyToggleButton extends MyButton {
@@ -20,13 +24,21 @@ class MyToggleButton extends MyButton {
 
     connectedCallback() {
         super.connectedCallback();
+        this.button.classList.add("toggle");
         this.#update();
     }
 
     #update() {
-        const btn = this.querySelector("button");
+        const btn = this.button;
         btn.textContent = this.#_toggled ? "OFF" : "ON";
-        this.classList.toggle("toggled", this.#_toggled);
+
+        if (this.#_toggled) {
+            this.button.classList.add("on");
+            this.button.classList.remove("off");
+        } else {
+            this.button.classList.add("off");
+            this.button.classList.remove("on");
+        }
     }
 
     get toggled() {
