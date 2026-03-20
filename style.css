@@ -216,17 +216,19 @@ main > header {
     margin-bottom: var(--space-8);
 
     #stats {
-        > span {
+        display: flex;
+
+        > li {
             display: inline-flex;
             gap: var(--space-3);
         }
 
-        span + span {
+        li + li {
             border-left: 1px solid var(--neutral-400);
             padding-left: var(--space-6);
         }
 
-        span:not(:last-child) {
+        li:not(:last-child) {
             padding-right: var(--space-6);
         }
     }

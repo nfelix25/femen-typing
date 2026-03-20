@@ -12,8 +12,10 @@
             href="./assets/images/favicon-32x32.png"
         />
 
+        <link rel="stylesheet" href="reset.css" />
         <link rel="stylesheet" href="style.css" />
 
+        <script src="index.js" defer></script>
         <script src="my-button.js" defer></script>
         <script src="my-text.js" defer></script>
 
@@ -23,27 +25,29 @@
         <header>
             <img src="assets/images/logo-large.svg" />
             <span
-                ><img src="assets/images/icon-personal-best.svg" /><my-text
-                    preset="4"
-                    variant="dark"
-                    >Personal Best: </my-text
-                ><my-text preset="4">--WPM</my-text></span
+                ><img
+                    src="assets/images/icon-personal-best.svg"
+                /><my-text-4-dark>Personal Best: </my-text-4-dark
+                ><my-text-4>--WPM</my-text-4></span
             >
         </header>
         <main>
             <header>
-                <span id="stats"
-                    ><span
-                        ><my-text preset="3" variant="dark">WPM:</my-text
-                        ><my-text preset="2" semi-bold>--</my-text></span
-                    ><span
-                        ><my-text preset="3" variant="dark">Accuracy:</my-text
-                        ><my-text preset="2" semi-bold>100%</my-text></span
-                    ><span
-                        ><my-text preset="3" variant="dark">Time:</my-text
-                        ><my-text preset="2" semi-bold>456</my-text></span
-                    ></span
-                ><span id="settings">SETTINGS</span>
+                <ul id="stats">
+                    <li>
+                        <my-text-3-dark>WPM:</my-text-3-dark
+                        ><my-text-2-semi>--</my-text-2-semi>
+                    </li>
+                    <li>
+                        <my-text-3-dark>Accuracy:</my-text-3-dark
+                        ><my-text-2-semi>100%</my-text-2-semi>
+                    </li>
+                    <li>
+                        <my-text-3-dark>Time:</my-text-3-dark
+                        ><my-text-time id="time">456</my-text-time>
+                    </li>
+                </ul>
+                <span id="settings">SETTINGS</span>
             </header>
         </main>
 
