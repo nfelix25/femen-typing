@@ -60,14 +60,6 @@ class MyText extends HTMLElement {
     }
 }
 
-class MyTimeText extends MyText {
-    constructor(props) {
-        super({ ...props, hasShadow: true });
-        // attachShadow` creates the isolated subtree and assigns it to `this.shadowRoot`. `mode: 'open'` means external JS can still access it via `element.shadowRoot` — `'closed'` would block that entirely.
-        this.attachShadow({ mode: "open" });
-    }
-}
-
 class MyTextTwo extends MyText {
     constructor(props) {
         super({ ...props, preset: "2" });
@@ -104,6 +96,47 @@ class MyTextFourDark extends MyTextFour {
     }
 }
 
+class MyTimer extends MyTextTwoSemiBold {
+    #_curr_time = 0.0;
+    #_startTime = null;
+    #_frameId;
+
+    constructor(props) {
+        super({ ...props, hasShadow: true });
+        // attachShadow` creates the isolated subtree and assigns it to `this.shadowRoot`. `mode: 'open'` means external JS can still access it via `element.shadowRoot` — `'closed'` would block that entirely.
+        this.attachShadow({ mode: "open" });
+    }
+
+    #loop(timestamp) {
+        this.time += (timestamp - this.#_startTime) / 1000;
+        this.#_startTime = timestamp;
+        this.#_frameId = requestAnimationFrame((ts) => {
+            this.#loop(ts);
+        });
+    }
+
+    start() {
+        this.#_startTime = performance.now();
+        this.#_frameId = requestAnimationFrame((ts) => {
+            this.#loop(ts);
+        });
+    }
+
+    end() {
+        cancelAnimationFrame(this.#_frameId);
+    }
+
+    get time() {
+        return this.#_curr_time;
+    }
+
+    set time(value) {
+        this.#_curr_time = value;
+        const span = this.shadowRoot?.querySelector("span");
+        if (span) span.textContent = value.toFixed(2);
+    }
+}
+
 customElements.define("my-text", MyText);
 customElements.define("my-text-2", MyTextTwo);
 customElements.define("my-text-2-semi", MyTextTwoSemiBold);
@@ -111,3 +144,4 @@ customElements.define("my-text-3", MyTextThree);
 customElements.define("my-text-3-dark", MyTextThreeDark);
 customElements.define("my-text-4", MyTextFour);
 customElements.define("my-text-4-dark", MyTextFourDark);
+customElements.define("my-timer", MyTimer);

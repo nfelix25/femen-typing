@@ -1,15 +1,22 @@
 (() => {
-    let interval, start;
+    let timer;
 
-    function begin() {
-        document.addEventListener("DOMContentLoaded", () => {
-            const el = document.getElementById("time");
+    document.addEventListener("DOMContentLoaded", () => {
+        timer = document.getElementById("time");
+        timer.time = 0;
 
-            interval = setInterval(() => {
-                el.innerText = new Date().toLocaleTimeString();
-            }, 1000);
-        });
-    }
+        setTimeout(() => {
+            timer.end();
+        }, 60000);
+    });
 
-    function end() {}
+    document.addEventListener("toggle", (event) => {
+        if (event.target.id === "time-toggle") {
+            if (event.detail.toggled) {
+                timer.start();
+            } else {
+                timer.end();
+            }
+        }
+    });
 })();

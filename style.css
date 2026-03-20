@@ -144,7 +144,7 @@ body {
     color: var(--neutral-400);
 }
 
-my-button button {
+:is(my-button, my-toggle) button {
     font-family: inherit;
     display: inline-flex;
 
