@@ -95,6 +95,10 @@ body {
     color: var(--neutral-0);
     padding-inline: 112px;
     padding-block: var(--space-8);
+
+    @media (max-width: 1400px) {
+        padding-inline: var(--space-8);
+    }
 }
 
 .font-bold {
@@ -227,8 +231,16 @@ body > header {
 main > header {
     padding-bottom: var(--space-4);
     margin-bottom: var(--space-8);
+    display: flex;
 
-    #stats {
+    @media (max-width: 1230px) {
+        flex-direction: column-reverse;
+        align-items: flex-start;
+        gap: var(--space-4);
+        height: var(--space-24);
+    }
+
+    .header-list {
         display: flex;
 
         > li {

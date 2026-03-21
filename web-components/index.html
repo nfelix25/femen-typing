@@ -39,7 +39,7 @@
         </header>
         <main>
             <header>
-                <ul id="stats">
+                <ul class="header-list" id="stats">
                     <li>
                         <my-text-3-dark>WPM:</my-text-3-dark
                         ><my-text-2-semi>--</my-text-2-semi>
@@ -53,20 +53,27 @@
                         ><my-timer id="time">-.--</my-timer>
                     </li>
                 </ul>
-                <span id="settings"
-                    ><my-text-4-dark>Difficulty: </my-text-4-dark
-                    ><chip-group id="difficulty-selector"
-                        ><my-chip data-label="Easy">Easy</my-chip
-                        ><my-chip data-label="Medium">Medium</my-chip
-                        ><my-chip data-label="Hard">Hard</my-chip></chip-group
-                    ><my-text-4-dark>Mode: </my-text-4-dark
-                    ><chip-group id="mode-selector"
-                        ><my-chip data-label="Timed">Timed</my-chip
-                        ><my-chip data-label="Passage"
-                            >Passage</my-chip
-                        ></chip-group
-                    ></span
-                >
+                <ul class="header-list" id="settings">
+                    <li>
+                        <my-text-4-dark>Difficulty: </my-text-4-dark
+                        ><chip-group id="difficulty-selector"
+                            ><my-chip data-label="Easy">Easy</my-chip
+                            ><my-chip data-label="Medium">Medium</my-chip
+                            ><my-chip data-label="Hard"
+                                >Hard</my-chip
+                            ></chip-group
+                        >
+                    </li>
+                    <li>
+                        <my-text-4-dark>Mode: </my-text-4-dark
+                        ><chip-group id="mode-selector"
+                            ><my-chip data-label="Timed">Timed</my-chip
+                            ><my-chip data-label="Passage"
+                                >Passage</my-chip
+                            ></chip-group
+                        >
+                    </li>
+                </ul>
             </header>
         </main>
 
