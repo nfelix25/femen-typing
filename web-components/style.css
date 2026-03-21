@@ -356,3 +356,29 @@ chip-group.left .chippy.deselecting::after {
         clip-path: inset(0 100% 0 0);
     }
 }
+
+my-typing {
+    &:focus,
+    &:focus-visible {
+        outline: none;
+    }
+
+    &:focus span {
+        &.current {
+            text-decoration: underline;
+            text-decoration-color: var(--blue-400);
+            text-underline-offset: 4px;
+        }
+
+        &.correct {
+            color: var(--green-500);
+        }
+
+        &.incorrect {
+            color: var(--red-500);
+            text-decoration: underline;
+            text-decoration-color: var(--red-400);
+            text-underline-offset: 4px;
+        }
+    }
+}

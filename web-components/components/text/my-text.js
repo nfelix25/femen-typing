@@ -141,6 +141,31 @@ class MyTimer extends MyTextTwoSemiBold {
     }
 }
 
+class MyTyping extends MyText {
+    constructor(props) {
+        super({ ...props, preset: "1" });
+    }
+
+    connectedCallback() {
+        // super.connectedCallback();
+        console.log("MyTyping connected to the DOM");
+        this.addEventListener("keypress", (event) => {
+            this.handleKeypress(event);
+        });
+    }
+
+    handleKeypress(event) {
+        // Implement logic to handle keypress events for typing practice
+        console.log(`Key pressed: ${event}`);
+        this.dispatchEvent(
+            new CustomEvent("test-keypress", {
+                bubbles: true,
+                detail: { key: event.key },
+            }),
+        );
+    }
+}
+
 customElements.define("my-text", MyText);
 customElements.define("my-text-2", MyTextTwo);
 customElements.define("my-text-2-semi", MyTextTwoSemiBold);
@@ -149,3 +174,4 @@ customElements.define("my-text-3-dark", MyTextThreeDark);
 customElements.define("my-text-4", MyTextFour);
 customElements.define("my-text-4-dark", MyTextFourDark);
 customElements.define("my-timer", MyTimer);
+customElements.define("my-typing", MyTyping);
