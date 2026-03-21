@@ -15,6 +15,7 @@
 
     --blue-600: hsl(214 100 55);
     --blue-400: hsl(210 100 65);
+    --blue-200: hsl(210 100 75);
 
     --red-500: hsl(354 63 57);
 
@@ -257,14 +258,23 @@ chip-group {
     background-color: transparent;
     color: var(--neutral-0);
     border-radius: 0.8rem;
-    border: none;
+    border: 2px solid var(--neutral-500);
     cursor: pointer;
+}
+
+.chippy:hover {
+    color: var(--blue-200);
 }
 
 .chippy::after {
     content: attr(data-label);
     position: absolute;
-    inset: 0;
+
+    /*An absolutely positioned `::after` with `inset: 0` always aligns to the parent's **padding edge** — the inside of the border — regardless of `box-sizing`. That's just how the CSS containing block works: the border is excluded from the reference rectangle for absolute positioning.
+
+    So the 2px gray border always pushes the `::after` inward by 2px, and `box-sizing` can't change that.*/
+
+    inset: -2px;
     border: 2px var(--blue-400) solid;
     border-radius: 0.8rem;
     clip-path: inset(0 100% 0 0); /* fully hidden, right edge closed */
