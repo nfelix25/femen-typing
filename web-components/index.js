@@ -7,16 +7,25 @@
 })();
 
 const difficulties = ["Easy", "Medium", "Hard"];
+const modes = ["Timed", "Passage"];
 
 class App {
     #timer = document.getElementById("time");
     #toggle = document.getElementById("time-toggle");
     #reset = document.getElementById("reset-timer");
+
+    #difficulties = document.getElementById("difficulty-selector");
+    #modes = document.getElementById("mode-selector");
+
     #difficultyIdx = 0;
+    #modeIdx = 0;
 
     constructor() {
         this.#timer.time = 0;
         this.#reset.button.disabled = true;
+
+        this.#difficulties.chips[this.#difficultyIdx].select();
+        this.#modes.chips[this.#modeIdx].select();
 
         this.#reset.addEventListener("click", () => {
             this.#timer.reset();
@@ -42,6 +51,8 @@ class App {
         document.addEventListener("chip-select", (event) => {
             if (event.target.parentElement.id === "difficulty-selector") {
                 this.#difficultyIdx = event.detail.selectedIndex;
+            } else if (event.target.parentElement.id === "mode-selector") {
+                this.#modeIdx = event.detail.selectedIndex;
             }
         });
 
