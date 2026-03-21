@@ -245,3 +245,92 @@ main > header {
         }
     }
 }
+
+chip-group {
+    display: inline-flex;
+    gap: var(--space-2);
+    background-color: transparent;
+}
+
+.chippy {
+    position: relative;
+    background-color: transparent;
+    color: var(--neutral-0);
+    border-radius: 0.8rem;
+    border: none;
+    cursor: pointer;
+}
+
+.chippy::after {
+    content: attr(data-label);
+    position: absolute;
+    inset: 0;
+    border: 2px var(--blue-400) solid;
+    border-radius: 0.8rem;
+    clip-path: inset(0 100% 0 0); /* fully hidden, right edge closed */
+    transition: clip-path 300ms ease;
+    color: var(--blue-400);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.chippy.selected::after {
+    clip-path: inset(0 0% 0 0); /* fully revealed */
+}
+
+@keyframes wipe-right {
+    from {
+        clip-path: inset(0 100% 0 0);
+    }
+    to {
+        clip-path: inset(0 0% 0 0);
+    }
+}
+
+@keyframes wipe-left {
+    from {
+        clip-path: inset(0 0 0 100%);
+    }
+    to {
+        clip-path: inset(0 0 0 0%);
+    }
+}
+
+/* selected from the right — reveal from right to left */
+chip-group.left .chippy.selected::after {
+    animation: wipe-left 200ms ease forwards;
+}
+
+/* selected from the left — reveal from left to right */
+chip-group.right .chippy.selected::after {
+    animation: wipe-right 200ms ease forwards;
+}
+
+/* moving right — old chip closes from left */
+chip-group.right .chippy.deselecting::after {
+    animation: wipe-out-right 200ms ease forwards;
+}
+
+/* moving left — old chip closes from right */
+chip-group.left .chippy.deselecting::after {
+    animation: wipe-out-left 200ms ease forwards;
+}
+
+@keyframes wipe-out-right {
+    from {
+        clip-path: inset(0 0% 0 0);
+    }
+    to {
+        clip-path: inset(0 0 0 100%);
+    }
+}
+
+@keyframes wipe-out-left {
+    from {
+        clip-path: inset(0 0% 0 0);
+    }
+    to {
+        clip-path: inset(0 100% 0 0);
+    }
+}

@@ -6,10 +6,13 @@
     });
 })();
 
+const difficulties = ["Easy", "Medium", "Hard"];
+
 class App {
     #timer = document.getElementById("time");
     #toggle = document.getElementById("time-toggle");
     #reset = document.getElementById("reset-timer");
+    #difficultyIdx = 0;
 
     constructor() {
         this.#timer.time = 0;
@@ -33,6 +36,12 @@ class App {
                 } else {
                     this.#timer.end();
                 }
+            }
+        });
+
+        document.addEventListener("chip-select", (event) => {
+            if (event.target.parentElement.id === "difficulty-selector") {
+                this.#difficultyIdx = event.detail.selectedIndex;
             }
         });
 

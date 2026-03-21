@@ -137,7 +137,7 @@ class MyTimer extends MyTextTwoSemiBold {
     set time(value) {
         this.#_curr_time = value;
         const span = this.shadowRoot?.querySelector("span");
-        if (span) span.textContent = value.toFixed(2);
+        if (span) span.textContent = value !== 0 ? value.toFixed(2) : "-.--";
     }
 }
 

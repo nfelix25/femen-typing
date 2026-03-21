@@ -16,14 +16,20 @@
         <link rel="stylesheet" href="style.css" />
 
         <script src="index.js" defer></script>
-        <script src="my-button.js" defer></script>
-        <script src="my-text.js" defer></script>
+        <script src="components/button/my-button.js" defer></script>
+        <script src="components/text/my-text.js" defer></script>
 
         <title>Frontend Mentor | Typing Speed Test</title>
     </head>
     <body>
         <header>
-            <img src="assets/images/logo-large.svg" />
+            <picture>
+                <source
+                    media="(min-width: 768px)"
+                    srcset="assets/images/logo-large.svg"
+                />
+                <img src="assets/images/logo-small.svg" />
+            </picture>
             <span
                 ><img
                     src="assets/images/icon-personal-best.svg"
@@ -40,14 +46,21 @@
                     </li>
                     <li>
                         <my-text-3-dark>Accuracy:</my-text-3-dark
-                        ><my-text-2-semi>100%</my-text-2-semi>
+                        ><my-text-2-semi>--%</my-text-2-semi>
                     </li>
                     <li>
                         <my-text-3-dark>Time:</my-text-3-dark
-                        ><my-timer id="time">456</my-timer>
+                        ><my-timer id="time">-.--</my-timer>
                     </li>
                 </ul>
-                <span id="settings">SETTINGS</span>
+                <span id="settings"
+                    ><my-text-4-dark>Difficulty: </my-text-4-dark
+                    ><chip-group id="difficulty-selector"
+                        ><my-chip data-label="Easy">Easy</my-chip
+                        ><my-chip data-label="Medium">Medium</my-chip
+                        ><my-chip data-label="Hard">Hard</my-chip></chip-group
+                    ><my-text-4-dark>Mode: </my-text-4-dark></span
+                >
             </header>
         </main>
 
