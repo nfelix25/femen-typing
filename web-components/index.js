@@ -75,25 +75,30 @@ class App {
     }
 
     async loadData() {
-        const path = "./data.json";
+        const difficulty =
+            difficulties[this.#difficultyIdx].toLocaleLowerCase();
+        const res = await fetch("http://localhost:3000/generate_test", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ difficulty, language: "TypeScript" }),
+        });
+        console.log(res);
 
-        const data = await fetch(path);
+        const selection = await res.json();
 
-        const json = await data.json();
+        console.log(selection);
 
-        const dataFilteredForDifficulty =
-            json[difficulties[this.#difficultyIdx].toLocaleLowerCase()];
+        this.#selection = selection.test;
+        // this.#selectionId = selection.id;
 
-        const selection =
-            dataFilteredForDifficulty[
-                Math.floor(Math.random() * dataFilteredForDifficulty.length)
-            ];
-
-        this.#selection = selection.text;
-        this.#selectionId = selection.id;
-
-        this.#typing.innerHTML = Array.from(selection.text)
-            .map((c) => `<span>${c}</span>`)
+        this.#typing.innerHTML = Array.from(this.#selection)
+            .map((c) =>
+                c === "\n"
+                    ? `<span data-newline><br></span>`
+                    : `<span>${c}</span>`,
+            )
             .join("");
 
         this.#selectionElements = this.#typing.querySelectorAll("span");
@@ -102,16 +107,35 @@ class App {
 
     handleTestKeypress(char) {
         console.log(`Key pressed in App: ${char}`);
+
+        const expected = this.#selection[this.#selectionIdx];
+        const normalized = char === "Enter" ? "\n" : char;
         const el = this.#selectionElements[this.#selectionIdx];
 
         el.classList.remove("current");
 
-        if (char === this.#selection[this.#selectionIdx]) {
+        if (normalized === expected) {
             el.classList.add("correct");
         } else {
             el.classList.add("incorrect");
         }
 
-        this.#selectionElements[++this.#selectionIdx].classList.add("current");
+        this.#selectionIdx++;
+
+        // Auto-advance through leading whitespace after a newline
+        if (normalized === "\n") {
+            while (
+                this.#selectionIdx < this.#selection.length &&
+                (this.#selection[this.#selectionIdx] === " " ||
+                    this.#selection[this.#selectionIdx] === "\t")
+            ) {
+                this.#selectionElements[this.#selectionIdx].classList.add(
+                    "correct",
+                );
+                this.#selectionIdx++;
+            }
+        }
+
+        this.#selectionElements[this.#selectionIdx].classList.add("current");
     }
 }

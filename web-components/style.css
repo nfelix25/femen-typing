@@ -363,6 +363,8 @@ my-typing {
         outline: none;
     }
 
+    white-space: pre;
+
     &:focus span {
         &.current {
             text-decoration: underline;
