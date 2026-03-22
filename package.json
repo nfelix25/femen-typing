@@ -1,0 +1,16 @@
+{
+    "scripts": {
+        "dev": "node --watch --watch-preserve-output server.ts"
+    },
+    "type": "module",
+    "devDependencies": {
+        "@types/express": "^5.0.6",
+        "typescript": "^5.9.3"
+    },
+    "dependencies": {
+        "@types/node": "^25.5.0",
+        "dotenv": "^17.3.1",
+        "express": "^5.2.1",
+        "openai": "^6.32.0"
+    }
+}
