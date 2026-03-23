@@ -104,17 +104,25 @@ class App {
         console.log(selection);
 
         this.#selection = selection.test.text;
-        // this.#selectionId = selection.id;
 
-        elements.typing.innerHTML = Array.from(this.#selection)
-            .map((c) =>
-                c === "\n"
-                    ? `<span data-newline>${ENTER_SYMBOL}<br></span>`
-                    : `<span>${c}</span>`,
+        const words = this.#selection
+            .split(" ")
+            .map(
+                (w) =>
+                    `<span class="word-span">${Array.from(w)
+                        .map((c) =>
+                            c === "\n"
+                                ? `<span class="char-span" data-newline>${ENTER_SYMBOL}<br></span>`
+                                : `<span class="char-span">${c}</span>`,
+                        )
+                        .join("")}</span>`,
             )
-            .join("");
+            .join("<span class='char-span'> </span>");
 
-        this.#selectionElements = elements.typing.querySelectorAll("span");
+        elements.typing.innerHTML = words;
+
+        this.#selectionElements =
+            elements.typing.querySelectorAll("span.char-span");
         this.#selectionElements[this.#selectionIdx].classList.add("current");
     }
 

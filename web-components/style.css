@@ -364,6 +364,8 @@ my-typing {
     }
 
     white-space: pre;
+    display: flex;
+    flex-wrap: wrap;
 
     &:focus span {
         &.current {
