@@ -4,6 +4,7 @@ import "./components/text/my-text.js";
 import elements from "./elements.js";
 import { DIFFICULTIES, ENTER_SYMBOL, MODES } from "./constants.js";
 import Language from "./language.js";
+import { text } from "express";
 
 (() => {
     let app;
@@ -160,3 +161,7 @@ class App {
         this.#selectionElements[this.#selectionIdx].classList.add("current");
     }
 }
+
+- Animate menu group open / close
+- Add cursor pointer to menu group text
+- Add language selection logic
