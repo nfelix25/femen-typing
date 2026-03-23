@@ -145,6 +145,12 @@ body {
     letter-spacing: var(--tracking-tighter);
 }
 
+.text-preset-5 {
+    font-size: var(--text-xs);
+    line-height: var(--leading-snug);
+    letter-spacing: var(--tracking-tight);
+}
+
 .text-dark {
     color: var(--neutral-400);
 }
@@ -358,20 +364,22 @@ chip-group.left .chippy.deselecting::after {
 }
 
 my-typing {
+    white-space: pre;
+    display: flex;
+    flex-wrap: wrap;
+
+    .space-span {
+        letter-spacing: var(--tracking-wider);
+    }
+
     &:focus,
     &:focus-visible {
         outline: none;
     }
 
-    white-space: pre;
-    display: flex;
-    flex-wrap: wrap;
-
     &:focus span {
         &.current {
-            text-decoration: underline;
-            text-decoration-color: var(--blue-400);
-            text-underline-offset: 4px;
+            background-color: var(--blue-600);
         }
 
         &.correct {
@@ -383,6 +391,32 @@ my-typing {
             text-decoration: underline;
             text-decoration-color: var(--red-400);
             text-underline-offset: 4px;
+        }
+    }
+}
+
+menu-group {
+    li {
+        chip-group {
+            gap: 0;
+        }
+
+        button {
+            display: none;
+        }
+
+        button.selected {
+            display: inline-flex;
+        }
+
+        &.active {
+            chip-group {
+                gap: inherit;
+            }
+
+            button {
+                display: inline-flex;
+            }
         }
     }
 }

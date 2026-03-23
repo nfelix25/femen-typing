@@ -51,7 +51,16 @@
                         ><my-timer id="time">-.--</my-timer>
                     </li>
                 </ul>
-                <ul class="header-list" id="settings">
+                <menu-group class="header-list" id="settings">
+                    <li>
+                        <my-text-4-dark>Language: </my-text-4-dark
+                        ><chip-group id="language-selector"
+                            ><my-chip data-label="Standard">Standard</my-chip
+                            ><my-chip data-label="TypeScript"
+                                >TypeScript</my-chip
+                            ></chip-group
+                        >
+                    </li>
                     <li>
                         <my-text-4-dark>Difficulty: </my-text-4-dark
                         ><chip-group id="difficulty-selector"
@@ -71,7 +80,7 @@
                             ></chip-group
                         >
                     </li>
-                </ul>
+                </menu-group>
             </header>
             <my-toggle id="time-toggle"></my-toggle>
             <my-button

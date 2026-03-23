@@ -117,7 +117,7 @@ class App {
                         )
                         .join("")}</span>`,
             )
-            .join("<span class='char-span'> </span>");
+            .join("<span class='char-span space-span'> </span>");
 
         elements.typing.innerHTML = words;
 

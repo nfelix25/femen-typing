@@ -136,7 +136,50 @@ class ChipGroup extends HTMLElement {
     }
 }
 
+class MenuGroup extends HTMLElement {
+    #_activatedIndex = null;
+    #_menuItems;
+
+    constructor() {
+        super();
+
+        this.attachShadow({ mode: "open" });
+    }
+
+    connectedCallback() {
+        const className = this.getAttribute("class") ?? "menu-group";
+
+        this.shadowRoot.innerHTML = `
+            <link rel="stylesheet" href="style.css">
+            <ul class="${className}"><slot></slot></ul>`;
+
+        this.#_menuItems = this.querySelectorAll("li");
+        console.log(this.#_menuItems);
+
+        this.#_menuItems.forEach((item, idx) => {
+            item.querySelector("my-text-4-dark").addEventListener(
+                "click",
+                () => {
+                    this.handleSelection(idx);
+                },
+            );
+        });
+    }
+
+    handleSelection(itemIndex) {
+        this.#_menuItems[this.#_activatedIndex]?.classList.remove("active");
+
+        if (this.#_activatedIndex === itemIndex) {
+            this.#_activatedIndex = null;
+        } else {
+            this.#_activatedIndex = itemIndex;
+            this.#_menuItems[itemIndex].classList.add("active");
+        }
+    }
+}
+
 customElements.define("my-button", MyButton);
 customElements.define("my-toggle", MyToggleButton);
 customElements.define("my-chip", MyChip);
 customElements.define("chip-group", ChipGroup);
+customElements.define("menu-group", MenuGroup);
