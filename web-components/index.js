@@ -4,7 +4,6 @@ import "./components/text/my-text.js";
 import elements from "./elements.js";
 import { DIFFICULTIES, ENTER_SYMBOL, MODES } from "./constants.js";
 import Language from "./language.js";
-import { text } from "express";
 
 (() => {
     let app;
@@ -18,7 +17,9 @@ class App {
     #languages;
 
     #difficultyIdx = 0;
+    #languageIdx = 0;
     #modeIdx = 0;
+
     #selectionIdx = 0;
 
     #selection;
@@ -30,6 +31,7 @@ class App {
         elements.reset.button.disabled = true;
 
         elements.difficulties.chips[this.#difficultyIdx].select();
+        elements.languages.chips[this.#languageIdx].select();
         elements.modes.chips[this.#modeIdx].select();
 
         elements.reset.addEventListener("click", () => {
@@ -54,21 +56,26 @@ class App {
         });
 
         document.addEventListener("chip-select", (event) => {
-            if (event.target.id === "difficulty-selector") {
-                this.#difficultyIdx = event.detail.selectedIndex;
-                this.loadData();
-            } else if (event.target.id === "mode-selector") {
-                this.#modeIdx = event.detail.selectedIndex;
+            switch (event.target.id) {
+                case "difficulty-selector": {
+                    this.#difficultyIdx = event.detail.selectedIndex;
+                    this.loadData();
+                    break;
+                }
+                case "mode-selector": {
+                    this.#modeIdx = event.detail.selectedIndex;
+                    break;
+                }
+                case "language-selector": {
+                    this.#languageIdx = event.detail.selectedIndex;
+                    break;
+                }
             }
         });
 
         document.addEventListener("test-keypress", (event) => {
             this.handleTestKeypress(event.detail.key);
         });
-
-        setTimeout(() => {
-            elements.toggle.toggled = false;
-        }, 60000);
 
         this.initializeLanguages().then(() => {
             this.loadData();
@@ -110,7 +117,7 @@ class App {
             .split(" ")
             .map(
                 (w) =>
-                    `<span class="word-span">${Array.from(w)
+                    `<span class="text-preset-1 word-span">${Array.from(w)
                         .map((c) =>
                             c === "\n"
                                 ? `<span class="char-span" data-newline>${ENTER_SYMBOL}<br></span>`
@@ -161,7 +168,3 @@ class App {
         this.#selectionElements[this.#selectionIdx].classList.add("current");
     }
 }
-
-- Animate menu group open / close
-- Add cursor pointer to menu group text
-- Add language selection logic
