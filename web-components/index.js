@@ -1,3 +1,10 @@
+import "./components/button/my-button.js";
+import "./components/text/my-text.js";
+
+import elements from "./elements.js";
+import { DIFFICULTIES, ENTER_SYMBOL, MODES } from "./constants.js";
+import Language from "./language.js";
+
 (() => {
     let app;
 
@@ -6,50 +13,41 @@
     });
 })();
 
-const difficulties = ["Easy", "Medium", "Hard"];
-const modes = ["Timed", "Passage"];
-
 class App {
-    #timer = document.getElementById("time");
-    #toggle = document.getElementById("time-toggle");
-    #reset = document.getElementById("reset-timer");
-    #typing = document.getElementById("typing-entry");
-
-    #difficulties = document.getElementById("difficulty-selector");
-    #modes = document.getElementById("mode-selector");
+    #languages;
 
     #difficultyIdx = 0;
     #modeIdx = 0;
+    #selectionIdx = 0;
 
     #selection;
     #selectionId;
     #selectionElements;
-    #selectionIdx = 0;
 
     constructor() {
-        this.#timer.time = 0;
-        this.#reset.button.disabled = true;
+        elements.timer.time = 0;
+        elements.reset.button.disabled = true;
 
-        this.#difficulties.chips[this.#difficultyIdx].select();
-        this.#modes.chips[this.#modeIdx].select();
+        elements.difficulties.chips[this.#difficultyIdx].select();
+        elements.modes.chips[this.#modeIdx].select();
 
-        this.#reset.addEventListener("click", () => {
-            this.#timer.reset();
+        elements.reset.addEventListener("click", () => {
+            elements.timer.reset();
             setTimeout(() => {
-                this.#reset.button.disabled = this.#timer.time === 0;
+                elements.reset.button.disabled = elements.timer.time === 0;
             });
         });
 
         document.addEventListener("toggle", (event) => {
-            if (this.#reset.button.disabled) {
-                this.#reset.button.disabled = false;
+            if (elements.reset.button.disabled) {
+                elements.reset.button.disabled = false;
             }
 
-            if (event.target.id === this.#toggle.id) {
+            if (event.target.id === elements.toggle.id) {
                 if (event.detail.toggled) {
-                    this.#timer.start();
+                    elements.timer.start();
                 } else {
-                    this.#timer.end();
+                    elements.timer.end();
                 }
             }
         });
@@ -68,40 +66,55 @@ class App {
         });
 
         setTimeout(() => {
-            this.#toggle.toggled = false;
+            elements.toggle.toggled = false;
         }, 60000);
 
-        this.loadData();
+        this.initializeLanguages().then(() => {
+            this.loadData();
+        });
+    }
+
+    async initializeLanguages() {
+        const { languageStats } = await (
+            await fetch("http://localhost:3000/language_stats")
+        ).json();
+
+        const languages = languageStats.map((l) => new Language(l));
+
+        this.#languages = languages;
     }
 
     async loadData() {
         const difficulty =
-            difficulties[this.#difficultyIdx].toLocaleLowerCase();
-        const res = await fetch("http://localhost:3000/generate_test", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({ difficulty, language: "TypeScript" }),
-        });
+            DIFFICULTIES[this.#difficultyIdx].toLocaleLowerCase();
+        // const res = await fetch("http://localhost:3000/generate_test", {
+        //     method: "POST",
+        //     headers: {
+        //         "Content-Type": "application/json",
+        //     },
+        //     body: JSON.stringify({ difficulty, language: "TypeScript" }),
+        // });
+        // console.log(res);
+        const std = this.#languages.find((l) => l.language === "standard");
+        console.log(this.#languages);
+        const res = await std.getRandomExistingTest(difficulty);
         console.log(res);
-
         const selection = await res.json();
 
         console.log(selection);
 
-        this.#selection = selection.test;
+        this.#selection = selection.test.text;
         // this.#selectionId = selection.id;
 
-        this.#typing.innerHTML = Array.from(this.#selection)
+        elements.typing.innerHTML = Array.from(this.#selection)
             .map((c) =>
                 c === "\n"
-                    ? `<span data-newline><br></span>`
+                    ? `<span data-newline>${ENTER_SYMBOL}<br></span>`
                     : `<span>${c}</span>`,
             )
             .join("");
 
-        this.#selectionElements = this.#typing.querySelectorAll("span");
+        this.#selectionElements = elements.typing.querySelectorAll("span");
         this.#selectionElements[this.#selectionIdx].classList.add("current");
     }
 
