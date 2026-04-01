@@ -47,6 +47,7 @@ class MyText extends HTMLElement {
     }
 
     connectedCallback() {
+        MUST BE IDEMPOTENT. CONNECTED CALLBACK WILL RUN EVERY TIME THE ELEMENT IS ATTACHED TO THE DOM, SO IT SHOULD NOT ASSUME IT ONLY RUNS ONCE. THIS MEANS WE SHOULD RE-READ ATTRIBUTES AND RE-APPLY CLASSES/CONTENT EACH TIME.
         const classStr = this.#composeClass();
         const content = this.textContent;
 
